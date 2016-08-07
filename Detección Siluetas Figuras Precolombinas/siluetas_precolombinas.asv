@@ -1,0 +1,55 @@
+clc;
+clear all;
+close all;
+BW = imread('im1611.png');
+lum=imhist(BW);
+%der=diff(lum,1);
+% int(1)=0;
+% figure;
+% subplot(2,1,1), plot(1:length(lum),lum,'b',1:length(lum),ones(1,length(lum))*mean2(lum),'r');
+% subplot(2,1,2), plot(der);
+% return;
+prom=mean2(lum);
+limi=100;%fix(mean2(BW));
+prim=find(lum(limi:end)>prom,true,'first');
+inds=limi+prim;%primero con mayor valor que el promedio y mayor a 100
+inv=flipud(lum(1:inds));
+for i=1:length(inv)
+    seg=find(inv(i:end)>inv(i),true,'first');
+    if(~isempty(seg))
+        seg=seg+i;
+        break;
+    end;
+end;
+pico2=inds-seg;
+valle=find(lum(pico2:inds)==min(lum(pico2:inds)),true,'last');
+valle=pico2+valle-1;
+% maxi=find(der==max(der));
+%invder=flipud(der(1:maxi));
+%prom=mean2(invder);
+%b=find(a==max(a));
+%c=flipud(a(1:b));
+%prim=find(c<420,true,'first');
+%d=b-prim;
+%prom=mean2(a);
+%find(a==max(a));
+%b=diff(a,1);
+%c=abs(b);
+%d=mean2(c);
+%e=c>=d;
+%prim=find(e,1,'first');
+im1=BW>valle;
+imshow(~im1);
+im1b=bwlabel(~im1);
+imshow(im1b);
+
+num=max(im1b(:));
+for i=1:num
+[r, c]=find(im1b==i);
+imr=bwselect(im1b,c,r);
+s = bwarea(imr);
+% figure(3),imshow(imr);
+area(i)=s;
+p = bwperim(imr
+bwperim(i)=
+end;
